@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self' https://sites.google.com *;">
+<title>Classroom Management Hub for Teachers · MarkupSite Template</title>
+<link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap' rel='stylesheet'>
+<style>
+
+    :root {
+      --font-head: 'Cormorant Garamond', serif;
+      --font-body: 'Work Sans', sans-serif;
+      --accent: #06b6d4;
+      --accent2: #3b82f6;
+      --bg: #0a1929;
+      --surface: #0f2942;
+      --text: #cfe8ff;
+      --muted: #7fa9cc;
+    }
+    
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 700; line-height: 1.15; }
+h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); }
+h3 { font-size: 1.35rem; }
+h4 { font-size: 1.1rem; }
+p  { margin: 0.7em 0; }
+a  { color: inherit; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+.container-narrow { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+/* ----- NAVBAR BASE (per spec) ----- */
+/* Pattern-specific CSS is injected per template via nav_pattern_css() */
+#navbar .brand { font-family: var(--font-head); font-weight: 800; white-space: nowrap; }
+#navbar .nav-item { cursor: pointer; transition: all .15s; }
+#navbar .nav-item.active { font-weight: 700; }
+
+/* ----- SECTION (per spec) ----- */
+.section { width: 100%; display: flex; align-items: center; }
+.section-inner { width: 100%; }
+.section-head { text-align: center; margin-bottom: 50px; }
+.section-head .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 700;
+                          letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 14px; }
+.section-head p { max-width: 680px; margin: 0 auto; }
+
+/* ----- HERO ----- */
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+.hero-text .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 700;
+                       letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+.hero-text h1 { margin-bottom: 20px; }
+.hero-text .lead { font-size: 1.15rem; margin-bottom: 28px; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+.hero-visual { display: flex; align-items: center; justify-content: center; min-height: 320px; }
+.hero-mock { width: 100%; max-width: 420px; padding: 20px; }
+.hero-mock-bar { display: flex; gap: 6px; margin-bottom: 18px; }
+.hero-mock-bar span { width: 12px; height: 12px; border-radius: 50%; }
+.hero-mock-line { height: 14px; margin-bottom: 14px; }
+.hero-mock-block { height: 80px; margin-bottom: 14px; }
+.hero-stats { display: flex; gap: 28px; margin-top: 36px; flex-wrap: wrap; }
+.hero-stat .num { font-family: var(--font-head); font-size: 2rem; font-weight: 800; }
+.hero-stat .label { font-size: 0.85rem; }
+
+/* ----- BUTTONS / PILLS ----- */
+.pill, .badge, .chip { display: inline-block; padding: 6px 14px; font-size: 0.8rem;
+                        font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.btn { display: inline-block; padding: 13px 24px; font-weight: 600; cursor: pointer;
+       border: 1px solid transparent; background: transparent; color: inherit;
+       font-family: var(--font-body); font-size: 0.96rem; transition: transform .15s, opacity .15s;
+       text-decoration: none; }
+.btn:hover { transform: translateY(-2px); }
+.btn-outline { border: 1px solid currentColor; }
+
+/* ----- CARDS / GRIDS ----- */
+.card { padding: 28px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+.feature { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.feat-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+             font-size: 1.5rem; }
+.feature h3 { margin-bottom: 4px; }
+.feature p { font-size: 0.95rem; }
+.feature .more { margin-top: auto; font-weight: 600; font-size: 0.9rem; }
+
+/* ----- STATS STRIP ----- */
+.stats-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+.stat-card { text-align: center; padding: 30px 20px; }
+.stat-card .num { font-family: var(--font-head); font-size: 2.6rem; font-weight: 800; line-height: 1; }
+.stat-card .label { margin-top: 8px; font-size: 0.9rem; }
+
+/* ----- ABOUT / SPLIT ----- */
+.split-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.split-2 .split-visual { min-height: 320px; display: flex; align-items: center; justify-content: center; padding: 30px; }
+.checklist { list-style: none; margin: 24px 0; }
+.checklist li { display: flex; gap: 12px; padding: 10px 0; align-items: flex-start; }
+.checklist .check { font-weight: 800; flex-shrink: 0; }
+.about-stats { display: flex; gap: 36px; margin-top: 30px; flex-wrap: wrap; }
+.about-stat .num { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; }
+.about-stat .label { font-size: 0.85rem; }
+
+/* ----- PROCESS / TIMELINE ----- */
+.process { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.process-step { position: relative; padding: 30px 24px; }
+.process-step .step-num { font-family: var(--font-head); font-size: 3rem; font-weight: 800; opacity: 0.25; line-height: 1; }
+.process-step h3 { margin: 12px 0; }
+.process-step p { font-size: 0.95rem; }
+
+/* ----- GALLERY ----- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.gallery-item { aspect-ratio: 4/3; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end;
+                position: relative; overflow: hidden; }
+.gallery-item .tag { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.gallery-item h4 { margin-top: 6px; }
+
+/* ----- TESTIMONIALS ----- */
+.testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.testimonial { padding: 30px; display: flex; flex-direction: column; gap: 16px; }
+.testimonial .quote { font-size: 1.05rem; line-height: 1.6; }
+.testimonial .person { display: flex; align-items: center; gap: 14px; }
+.testimonial .avatar { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+                        font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; }
+.testimonial .name { font-weight: 600; }
+.testimonial .role { font-size: 0.85rem; }
+.stars { display: flex; gap: 4px; font-size: 1.1rem; }
+
+/* ----- PRICING ----- */
+.pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: stretch; }
+.price-card { padding: 32px 28px; display: flex; flex-direction: column; gap: 16px; }
+.price-card.featured { transform: scale(1.03); }
+.price-card .plan { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+.price-card .price { font-family: var(--font-head); font-size: 2.6rem; font-weight: 800; }
+.price-card .price small { font-size: 0.9rem; font-weight: 500; }
+.price-card ul { list-style: none; margin: 12px 0; }
+.price-card li { padding: 8px 0; font-size: 0.92rem; border-bottom: 1px solid currentColor; opacity: 0.85; }
+.price-card li:last-child { border-bottom: none; }
+
+/* ----- FAQ ----- */
+.faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.faq-item { padding: 24px 28px; }
+.faq-item h4 { margin-bottom: 10px; }
+.faq-item p { font-size: 0.95rem; }
+
+/* ----- CTA ----- */
+.cta-banner { padding: 60px; text-align: center; }
+.cta-banner h2 { margin-bottom: 16px; }
+.cta-banner p { max-width: 560px; margin: 0 auto 28px; }
+.cta-banner .hero-cta { justify-content: center; }
+
+/* ----- CONTACT ----- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-info-item { display: flex; gap: 14px; align-items: flex-start; }
+.contact-info-item .ic { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.contact-info-item .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.contact-info-item .val { font-weight: 600; }
+.contact-form { display: flex; flex-direction: column; gap: 14px; padding: 30px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field label { display: block; font-size: 0.85rem; margin-bottom: 6px; font-weight: 600; }
+.field input, .field textarea, .field select {
+  width: 100%; padding: 12px 14px; background: transparent; color: inherit;
+  border: 1px solid currentColor; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem;
+}
+.field textarea { min-height: 120px; resize: vertical; }
+
+/* ----- FOOTER ----- */
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 30px; }
+.footer-brand .brand { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; margin-bottom: 12px; }
+.footer-col h5 { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+.footer-col ul { list-style: none; }
+.footer-col li { padding: 6px 0; font-size: 0.92rem; cursor: pointer; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px;
+                  margin-top: 50px; border-top: 1px solid currentColor; font-size: 0.85rem; flex-wrap: wrap; gap: 12px; }
+.socials { display: flex; gap: 10px; }
+.social { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+/* ----- UTIL ----- */
+.text-center { text-align: center; }
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+.nowrap { white-space: nowrap; }
+
+/* ----- UNIVERSAL MOBILE HAMBURGER MENU (applies to ALL nav patterns) ----- */
+#navbar .hamburger-btn {
+  display: none;  /* hidden on desktop, shown on mobile via media query */
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; padding: 8px;
+  background: transparent; border: none; cursor: pointer;
+  margin-left: auto; align-self: center;
+}
+#navbar .hamburger-btn span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text, #111); border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+#navbar.nav-open .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#navbar.nav-open .hamburger-btn span:nth-child(2) { opacity: 0; }
+#navbar.nav-open .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile breakpoint: show hamburger, hide ALL nav content by default.
+   Nav-items, segment-box, pill-wrap, row-bot etc. ONLY appear when
+   the user clicks the hamburger (navbar gets .nav-open class).
+   !important is used to override pattern-specific display:flex rules. */
+@media (max-width: 800px) {
+  /* Show the hamburger button on mobile */
+  #navbar .hamburger-btn { display: flex !important; }
+
+  /* Hide ALL nav-item containers by default on mobile.
+     They will only appear inside the dropdown when .nav-open is set. */
+  #navbar .nav-items,
+  #navbar .nav-pill-wrap,
+  #navbar .segment-box,
+  #navbar .row-bot,
+  #navbar .nav-left,
+  #navbar .nav-right-items {
+    display: none !important;
+  }
+
+  /* When hamburger is clicked (.nav-open), reveal the nav-items as a
+     vertical dropdown panel below the navbar. */
+  #navbar.nav-open .nav-items,
+  #navbar.nav-open .nav-pill-wrap,
+  #navbar.nav-open .segment-box,
+  #navbar.nav-open .row-bot,
+  #navbar.nav-open .nav-left,
+  #navbar.nav-open .nav-right-items {
+    display: flex !important;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0;
+    background: var(--surface, #fff);
+    border-bottom: 1px solid var(--muted, #ccc);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 8px 0;
+    max-height: 70vh; overflow-y: auto;
+    z-index: 9998;
+  }
+  #navbar.nav-open .nav-item,
+  #navbar.nav-open .nav-items .nav-item {
+    width: 100%; padding: 12px 20px; border-radius: 0;
+    font-size: 0.95rem; opacity: 0.85;
+  }
+  #navbar.nav-open .nav-item:hover { opacity: 1; }
+
+  /* On mobile, hide nav-right buttons (they crowd the bar) — keep only hamburger */
+  #navbar .nav-right { display: none !important; }
+  /* For patterns with utility rows / strips, hide them on mobile to save space */
+  #navbar .util-row, #navbar .strip, #navbar .row-top .util { display: none !important; }
+  /* Centered-logo: stack vertically and show hamburger */
+  #navbar .brand-row { width: 100%; text-align: left; padding-bottom: 0; }
+  #navbar .brand { font-size: 1.1rem !important; }
+  /* Pill-tabs / boxed-segments: unwrap on mobile when open */
+  #navbar.nav-open .nav-pill-wrap,
+  #navbar.nav-open .segment-box {
+    border-radius: 0; padding: 8px 0; background: var(--surface, #fff);
+  }
+  /* Split-nav: collapse to single column when open */
+  #navbar.nav-open .nav-left,
+  #navbar.nav-open .nav-right-items {
+    flex-direction: column; flex: 0 0 auto; width: 100%;
+  }
+  /* Search box hidden on mobile */
+  #navbar .search-box { display: none !important; }
+  /* Ensure navbar itself doesn't wrap — only brand + hamburger visible */
+  #navbar { flex-wrap: nowrap !important; }
+  #navbar .brand { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
+}
+
+/* ----- SCROLL PROGRESS BAR (per spec) ----- */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: var(--accent, #38bdf8);
+  z-index: 10000; transition: width 0.05s linear;
+  box-shadow: 0 0 8px var(--accent, #38bdf8);
+}
+
+/* ----- BACK-TO-TOP BUTTON (per spec) ----- */
+#back-to-top {
+  position: fixed; bottom: 28px; right: 28px;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent, #38bdf8); color: var(--bg, #ffffff);
+  border: none; border-radius: 50%; cursor: pointer;
+  font-size: 1.4rem; font-weight: 700; line-height: 1;
+  z-index: 9990; opacity: 0; visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity .2s, transform .2s, visibility .2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+#back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+#back-to-top:hover { transform: translateY(-3px); }
+@media (max-width: 600px) {
+  #back-to-top { bottom: 18px; right: 18px; width: 42px; height: 42px; font-size: 1.2rem; }
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; min-height: 220px; }
+  .split-2 { grid-template-columns: 1fr; gap: 30px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .price-card.featured { transform: none; }
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 18px; }
+  .hero-stat .num { font-size: 1.5rem; }
+}
+
+    
+    body { background: #0a1929; color: #cfe8ff; }
+    .surface { background: #0f2942; }
+    .accent { color: #06b6d4; }
+    .accent-bg { background: #06b6d4; color: #0a1929; }
+    .accent2-bg { background: #3b82f6; color: #0a1929; }
+    .muted { color: #7fa9cc; }
+    .bordered { border: 1px solid #7fa9cc33; }
+    .gradient-accent { background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #0a1929; }
+    .gradient-text { background: linear-gradient(135deg, #06b6d4, #3b82f6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .card { background: #0f2942; border: 1px solid #7fa9cc33; }
+    
+    .card { border-radius: 24px; }
+    .btn, .pill, .badge, .avatar, .chip { border-radius: 50px; }
+    
+    /* ===== NAV PATTERN CSS (logo-strip) ===== */
+    
+        #navbar {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 9995;
+          background: #0f2942; min-height: 80px; display: flex; flex-direction: column;
+          border-bottom: 1px solid #7fa9cc33;
+        }
+        body { padding-top: 80px; }
+        #navbar .strip {
+          background: #0a1929; padding: 5px 28px; font-size: 0.75rem; color: #7fa9cc;
+          display: flex; justify-content: space-between; align-items: center;
+        }
+        #navbar .strip .strip-items { display: flex; gap: 18px; }
+        #navbar .strip span { cursor: pointer; }
+        #navbar .main {
+          display: flex; align-items: center; gap: 28px; padding: 0 28px; flex: 1;
+        }
+        #navbar .brand { font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        #navbar .brand .logo-mark {
+          width: 28px; height: 28px; background: #06b6d4; display: inline-flex;
+          align-items: center; justify-content: center; color: #0a1929; font-weight: 800;
+          font-size: 0.9rem;
+        }
+        #navbar .nav-items { display: flex; gap: 4px; }
+        #navbar .nav-item {
+          padding: 8px 14px; font-size: 0.9rem; opacity: 0.7; border-radius: 6px;
+        }
+        #navbar .nav-item:hover { opacity: 1; background: #7fa9cc1a; }
+        #navbar .nav-item.active { opacity: 1; color: #06b6d4; }
+        #navbar .nav-right { margin-left: auto; display: flex; gap: 10px; }
+        @media (max-width: 800px) {
+          #navbar .strip { display: none; }
+          #navbar .main { flex-wrap: wrap; padding: 8px 16px; gap: 12px; }
+          #navbar .nav-items { width: 100%; order: 3; flex-wrap: wrap; }
+          #navbar .nav-item { padding: 6px 10px; font-size: 0.8rem; }
+        }
+        
+    /* Section variable params (per spec) */
+    .section { min-height: 95vh; padding: 110px 0;
+                border-top: 1px solid transparent; }
+    #footer.section { min-height: auto; }
+    .bar { background: #06b6d4; }
+    
+</style>
+</head>
+<body style="padding-top: 80px;">
+<!--
+Template #004
+Topic: Classroom Management Hub for Teachers
+Pillar: P1 - Google Sites Templates / Subcategory: Teachers
+Style signature: palette=Ocean Depth | font=Cormorant Garamond+Work Sans | effect=flat | shape=pill
+Nav pattern: logo-strip | Nav items: 4
+Nav params: NAV_HEIGHT=80px | SECTION_MIN=95vh | SECTION_PAD=110px 0 | SCROLL_OFFSET=14 | SPY_OFFSET=26 | Z=9995
+Features: fixed-nav, span-onclick, scroll-spy, scroll-progress-bar, back-to-top
+Sections: home, gallery, testimonials, contact + footer
+Generated by MarkupSite Template Generator v3 (full nav spec)
+-->
+
+<div id="scroll-progress" aria-hidden="true"></div>
+
+        <nav id="navbar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 9995; background: #0f2942; min-height: 80px; display: flex; align-items: center; border-bottom: 1px solid #7fa9cc33;">
+          <div class="strip">
+            <div class="strip-items">
+              <span>📞 +1 555 0100</span>
+              <span>✉ hello@markupsite.com</span>
+            </div>
+            <div class="strip-items">
+              <span>🌐 EN</span>
+              <span>Sign in</span>
+            </div>
+          </div>
+          <div class="main">
+            <div class="brand accent"><span class="logo-mark">C</span>Classroom</div>
+            <div class="nav-items"><span class="nav-item" id="link-home" onclick="goTo('home')">Classroom</span><span class="nav-item" id="link-gallery" onclick="goTo('gallery')">Peek</span><span class="nav-item" id="link-testimonials" onclick="goTo('testimonials')">Community</span><span class="nav-item" id="link-contact" onclick="goTo('contact')">Inbox</span></div>
+            <div class="nav-right">
+              <button class="btn accent-bg" onclick="goTo('contact')">Get Started</button>
+            </div>
+          </div>
+          <button class="hamburger-btn" aria-label="Toggle menu" onclick="document.getElementById('navbar').classList.toggle('nav-open')">
+            <span></span><span></span><span></span>
+          </button>
+        </nav>
+        
+    <section class="section" id="home">
+      <div class="container section-inner" style="padding: 60px 24px;">
+        <div class="hero">
+          <div class="hero-text">
+            <span class="eyebrow accent">P1 - Google Sites Templates · Teachers</span>
+            <h1>Classroom Management Hub for Teachers</h1>
+            <p class="lead muted">A purpose-built template covering Daily schedule planner, student behavior tracker, homework submission portal, parent communication log and more — designed to be clear, accessible, and adaptable across devices. Built with a fixed navigation bar, scroll-spy active states, and a modular section system you can rearrange in minutes.</p>
+            <div class="hero-cta">
+              <button class="btn accent-bg" onclick="goTo('features')">Explore Inside</button>
+              <button class="btn btn-outline" onclick="goTo('contact')">Inbox</button>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat"><div class="num accent">12+</div><div class="label muted">Core modules</div></div>
+              <div class="hero-stat"><div class="num accent">99.9%</div><div class="label muted">Uptime</div></div>
+              <div class="hero-stat"><div class="num accent">4.9★</div><div class="label muted">User rating</div></div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="card hero-mock">
+              <div class="hero-mock-bar">
+                <span class="accent-bg"></span><span class="accent2-bg"></span><span style="background:#7fa9cc;"></span>
+              </div>
+              <div class="hero-mock-line gradient-accent" style="width:80%;"></div>
+              <div class="hero-mock-line" style="width:60%; background:#7fa9cc55;"></div>
+              <div class="hero-mock-block gradient-accent" style="opacity:0.5;"></div>
+              <div class="hero-mock-line" style="width:70%; background:#7fa9cc55;"></div>
+              <div class="hero-mock-line" style="width:90%; background:#7fa9cc55;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="features">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">Inside</span>
+          <h2>Classroom Management Hub for Teachers: inside</h2>
+          <p class="muted">5 purpose-built modules cover the full lifecycle — from setup and configuration to daily use and reporting. Each module is self-contained, so you can adopt them incrementally.</p>
+        </div>
+        <div class="grid-4">
+        <article class="card feature">
+          <div class="feat-icon accent-bg">◆</div>
+          <h3>Daily schedule planner</h3>
+          <p class="muted">A focused module for daily schedule planner. Configure behaviour, permissions, and presentation per audience. Designed to work standalone or as part of the larger workflow.</p>
+          <span class="more accent">Learn more →</span>
+        </article>
+        
+        <article class="card feature">
+          <div class="feat-icon accent-bg">◇</div>
+          <h3>student behavior tracker</h3>
+          <p class="muted">A focused module for student behavior tracker. Configure behaviour, permissions, and presentation per audience. Designed to work standalone or as part of the larger workflow.</p>
+          <span class="more accent">Learn more →</span>
+        </article>
+        
+        <article class="card feature">
+          <div class="feat-icon accent-bg">◈</div>
+          <h3>homework submission portal</h3>
+          <p class="muted">A focused module for homework submission portal. Configure behaviour, permissions, and presentation per audience. Designed to work standalone or as part of the larger workflow.</p>
+          <span class="more accent">Learn more →</span>
+        </article>
+        
+        <article class="card feature">
+          <div class="feat-icon accent-bg">◉</div>
+          <h3>parent communication log</h3>
+          <p class="muted">A focused module for parent communication log. Configure behaviour, permissions, and presentation per audience. Designed to work standalone or as part of the larger workflow.</p>
+          <span class="more accent">Learn more →</span>
+        </article>
+        
+        <article class="card feature">
+          <div class="feat-icon accent-bg">◎</div>
+          <h3>resource sharing section with downloadable lesson materials</h3>
+          <p class="muted">A focused module for resource sharing section with downloadable lesson materials. Configure behaviour, permissions, and presentation per audience. Designed to work standalone or as part of the larger workflow.</p>
+          <span class="more accent">Learn more →</span>
+        </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="about">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="split-2">
+          <div class="split-text">
+            <span class="eyebrow accent">Mission</span>
+            <h2>The story behind classroom management hub for teachers</h2>
+            <p class="muted">Most templates stop at the homepage. This one continues — with structured about, process, gallery, testimonials, FAQ, and contact sections that all share the same visual language. The fixed top navigation makes every section reachable in a single click, and the scroll-spy system highlights the visitor's current position so they always know where they are.</p>
+            <p class="muted">Built mobile-first, the layout reflows cleanly from phone to desktop. Typography uses two carefully paired Google Fonts, loaded via &lt;link&gt; tags for maximum compatibility with Google Sites and other iframe-based hosts.</p>
+            <ul class="checklist">
+              <li><span class="check accent">✓</span><span><strong>Fixed navigation</strong> with smooth-scroll span links (no &lt;a&gt; tags, per spec).</span></li>
+              <li><span class="check accent">✓</span><span><strong>Scroll-spy</strong> updates the active nav item as the visitor scrolls.</span></li>
+              <li><span class="check accent">✓</span><span><strong>Section-based structure</strong> with consistent min-height and padding.</span></li>
+              <li><span class="check accent">✓</span><span><strong>Single self-contained file</strong> — only Google Fonts loaded externally.</span></li>
+            </ul>
+            <div class="about-stats">
+              <div class="about-stat"><div class="num accent">10+</div><div class="label muted">Sections</div></div>
+              <div class="about-stat"><div class="num accent">100%</div><div class="label muted">Responsive</div></div>
+              <div class="about-stat"><div class="num accent">0</div><div class="label muted">External deps</div></div>
+            </div>
+          </div>
+          <div class="split-visual card gradient-accent">
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-head); font-size:5rem; font-weight:800; opacity:0.4;">C</div>
+              <p style="font-size:1.1rem;">Classroom Management Hub for Teachers</p>
+              <p style="opacity:0.7; font-size:0.9rem;">Template preview block</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="stats">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">Data</span>
+          <h2>Data that matter</h2>
+        </div>
+        <div class="stats-strip"><div class="stat-card card"><div class="num accent">24/7</div><div class="label muted">Availability</div></div><div class="stat-card card"><div class="num accent">5 min</div><div class="label muted">Setup time</div></div><div class="stat-card card"><div class="num accent">12k+</div><div class="label muted">Active users</div></div><div class="stat-card card"><div class="num accent">48ms</div><div class="label muted">Avg response</div></div></div>
+      </div>
+    </section>
+    
+    <section class="section" id="process">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">How</span>
+          <h2>How: how it comes together</h2>
+          <p class="muted">No build pipeline, no package.json, no framework lock-in. Drop the file into your host and you're live.</p>
+        </div>
+        <div class="process"><div class="card process-step"><div class="step-num accent">01</div><h3>Plan</h3><p class="muted">Map out your goals, audience, and the modules that matter most. The structure is flexible enough to grow with you.</p></div><div class="card process-step"><div class="step-num accent">02</div><h3>Configure</h3><p class="muted">Set up the navigation, swap in your copy and imagery, and choose which sections to keep, reorder, or hide.</p></div><div class="card process-step"><div class="step-num accent">03</div><h3>Launch</h3><p class="muted">Publish in a single click. The fixed nav and scroll-spy give visitors a guided tour from the very first scroll.</p></div><div class="card process-step"><div class="step-num accent">04</div><h3>Iterate</h3><p class="muted">Use the included analytics hooks and feedback form to refine. Every section is self-contained, so edits stay safe.</p></div></div>
+      </div>
+    </section>
+    
+    <section class="section" id="gallery">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">Peek</span>
+          <h2>Peek: a look inside</h2>
+          <p class="muted">Six preview tiles representing the major surfaces of classroom management hub for teachers. Replace the placeholders with your own screenshots and product imagery.</p>
+        </div>
+        <div class="gallery"><div class="gallery-item gradient-accent"><span class="tag">View 01</span><h4>Overview panel</h4></div><div class="gallery-item card"><span class="tag accent">View 02</span><h4>Configuration view</h4></div><div class="gallery-item gradient-accent"><span class="tag">View 03</span><h4>Reporting dashboard</h4></div><div class="gallery-item card"><span class="tag accent">View 04</span><h4>User management</h4></div><div class="gallery-item gradient-accent"><span class="tag">View 05</span><h4>Mobile experience</h4></div><div class="gallery-item card"><span class="tag accent">View 06</span><h4>Integrations hub</h4></div></div>
+      </div>
+    </section>
+    
+    <section class="section" id="testimonials">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">Community</span>
+          <h2>Community from real users</h2>
+          <p class="muted">Honest feedback from teams who shipped with this template family.</p>
+        </div>
+        <div class="testimonials">
+        <article class="card testimonial">
+          <div class="stars accent">★★★★★</div>
+          <p class="quote">"The structure is clean and the navigation just works. Our team replaced three separate landing pages with a single template and saw engagement go up overnight."</p>
+          <div class="person">
+            <div class="avatar accent-bg">A</div>
+            <div>
+              <div class="name">Alex Rivera</div>
+              <div class="role muted">Product Lead</div>
+            </div>
+          </div>
+        </article>
+        
+        <article class="card testimonial">
+          <div class="stars accent">★★★★★</div>
+          <p class="quote">"Best decision we made was starting here. The scroll-spy nav gives visitors a real sense of progress as they explore, and our bounce rate dropped noticeably."</p>
+          <div class="person">
+            <div class="avatar accent-bg">J</div>
+            <div>
+              <div class="name">Jordan Mei</div>
+              <div class="role muted">Founder</div>
+            </div>
+          </div>
+        </article>
+        
+        <article class="card testimonial">
+          <div class="stars accent">★★★★★</div>
+          <p class="quote">"Finally a template that doesn&#x27;t look like every other Bootstrap clone. The styling feels deliberate, and it was easy to extend with our own brand colours."</p>
+          <div class="person">
+            <div class="avatar accent-bg">S</div>
+            <div>
+              <div class="name">Sam Okafor</div>
+              <div class="role muted">Marketing</div>
+            </div>
+          </div>
+        </article>
+        
+        <article class="card testimonial">
+          <div class="stars accent">★★★★★</div>
+          <p class="quote">"Setup took under ten minutes. The fixed nav spec is exactly what we needed for our Google Sites deployment — no surprises, no broken anchors."</p>
+          <div class="person">
+            <div class="avatar accent-bg">N</div>
+            <div>
+              <div class="name">Nina Patel</div>
+              <div class="role muted">Operations</div>
+            </div>
+          </div>
+        </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="pricing">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">Plans</span>
+          <h2>Plans for every stage</h2>
+          <p class="muted">Start free, upgrade when you're ready. No hidden fees, cancel any time.</p>
+        </div>
+        <div class="pricing">
+        <article class="card price-card">
+          <div class="plan accent">Starter</div>
+          <div class="price">$0 <small class="muted">per month</small></div>
+          <ul><li>✓ Up to 1 project</li><li>✓ Community support</li><li>✓ Core modules</li><li>✓ Mobile responsive</li></ul>
+          <button class="btn btn btn-outline" onclick="goTo('contact')">Choose Starter</button>
+        </article>
+        
+        <article class="card price-card featured gradient-accent">
+          <div class="plan accent">Pro</div>
+          <div class="price">$29 <small class="muted">per month</small></div>
+          <ul><li>✓ Unlimited projects</li><li>✓ Priority support</li><li>✓ All modules</li><li>✓ Custom branding</li><li>✓ Analytics</li></ul>
+          <button class="btn btn accent-bg" onclick="goTo('contact')">Choose Pro</button>
+        </article>
+        
+        <article class="card price-card">
+          <div class="plan accent">Team</div>
+          <div class="price">$79 <small class="muted">per month</small></div>
+          <ul><li>✓ Everything in Pro</li><li>✓ 5 team seats</li><li>✓ Shared assets</li><li>✓ Audit log</li><li>✓ SSO ready</li></ul>
+          <button class="btn btn btn-outline" onclick="goTo('contact')">Choose Team</button>
+        </article>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="faq">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">Help</span>
+          <h2>Help — answered</h2>
+        </div>
+        <div class="faq-list"><div class="card faq-item"><h4>Is the classroom management hub for teachers template really free to use?</h4><p class="muted">Yes. The template is provided as a single self-contained HTML file with no runtime dependencies beyond Google Fonts. You can host it anywhere — including Google Sites, GitHub Pages, or your own server.</p></div><div class="card faq-item"><h4>Do I need to know how to code?</h4><p class="muted">No. The template is structured so you can edit copy directly in the HTML. For more advanced customisation (colours, fonts, layout), a working knowledge of CSS helps but is not required.</p></div><div class="card faq-item"><h4>Will it work on mobile?</h4><p class="muted">Yes. Every section uses responsive CSS grid and fluid typography. The fixed navigation reflows to a stacked layout on narrow screens, and all interactive targets meet minimum tap-target sizes.</p></div><div class="card faq-item"><h4>Can I add more sections?</h4><p class="muted">Absolutely. Copy any existing &amp;lt;section class=&quot;section&quot;&amp;gt; block, give it a unique id, and add a matching &amp;lt;span&amp;gt; to the navbar with onclick=&quot;goTo(&#x27;newid&#x27;)&quot;. The scroll-spy will pick it up automatically.</p></div><div class="card faq-item"><h4>Does it work inside Google Sites?</h4><p class="muted">Yes. The template follows Google Sites constraints: viewport meta, CSP frame-ancestors meta, no fixed body width/height, fonts loaded via &amp;lt;link&amp;gt; tags, and no @import statements.</p></div></div>
+      </div>
+    </section>
+    
+    <section class="section" id="cta">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="card cta-banner gradient-accent">
+          <h2>Ready to launch classroom management hub for teachers?</h2>
+          <p>Drop the template into your host, swap in your copy, and publish. The fixed nav, scroll-spy, and modular sections do the rest.</p>
+          <div class="hero-cta">
+            <button class="btn accent-bg" onclick="goTo('contact')">Inbox Now</button>
+            <button class="btn btn-outline" onclick="goTo('features')">See Inside</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="contact">
+      <div class="container section-inner" style="padding: 80px 24px;">
+        <div class="section-head">
+          <span class="eyebrow accent">Inbox</span>
+          <h2>Inbox about classroom management hub for teachers</h2>
+          <p class="muted">Whether you're evaluating, customising, or scaling — we'd love to hear what you're building.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-info-item card">
+              <div class="ic accent-bg">✉</div>
+              <div><div class="label muted">Email</div><div class="val">hello@markupsite.com</div></div>
+            </div>
+            <div class="contact-info-item card">
+              <div class="ic accent-bg">☎</div>
+              <div><div class="label muted">Phone</div><div class="val">+1 (555) 012-3456</div></div>
+            </div>
+            <div class="contact-info-item card">
+              <div class="ic accent-bg">⌖</div>
+              <div><div class="label muted">Office</div><div class="val">123 Template Ave, Suite 400<br>San Francisco, CA</div></div>
+            </div>
+            <div class="contact-info-item card">
+              <div class="ic accent-bg">⏱</div>
+              <div><div class="label muted">Hours</div><div class="val">Mon–Fri · 9am–6pm PT</div></div>
+            </div>
+          </div>
+          <form class="card contact-form" onsubmit="event.preventDefault(); this.reset(); alert('Thanks — we\'ll be in touch shortly.');">
+            <div class="form-row">
+              <div class="field"><label for="cf-name">Name</label><input id="cf-name" type="text" placeholder="Your name" required></div>
+              <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" placeholder="you@company.com" required></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label for="cf-org">Organisation</label><input id="cf-org" type="text" placeholder="Company / school"></div>
+              <div class="field"><label for="cf-role">Role</label>
+                <select id="cf-role"><option>Founder</option><option>Product</option><option>Marketing</option><option>Engineering</option><option>Other</option></select>
+              </div>
+            </div>
+            <div class="field"><label for="cf-msg">Message</label><textarea id="cf-msg" placeholder="Tell us about your project..." required></textarea></div>
+            <button class="btn accent-bg" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    
+    <footer class="section" id="footer" style="min-height: auto; padding: 60px 0 30px;">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="brand accent">Classroom</div>
+            <p class="muted" style="max-width:280px;">A template for classroom management hub for teachers — built with the MarkupSite fixed-nav specification.</p>
+            <div class="socials mt-20">
+              <span class="social card accent-bg">in</span>
+              <span class="social card accent-bg">tw</span>
+              <span class="social card accent-bg">gh</span>
+              <span class="social card accent-bg">✉</span>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h5>Explore</h5>
+            <ul><li onclick="goTo('features')">Inside</li><li onclick="goTo('pricing')">Plans</li><li onclick="goTo('gallery')">Peek</li><li onclick="goTo('faq')">Help</li></ul>
+          </div>
+          <div class="footer-col">
+            <h5>Company</h5>
+            <ul><li onclick="goTo('about')">Mission</li><li onclick="goTo('process')">How</li><li onclick="goTo('testimonials')">Community</li><li onclick="goTo('contact')">Inbox</li></ul>
+          </div>
+          <div class="footer-col">
+            <h5>Resources</h5>
+            <ul><li>Documentation</li><li>Style guide</li><li>Changelog</li><li>Support</li></ul>
+          </div>
+        </div>
+        <div class="footer-bottom muted">
+          <span>© 2026 MarkupSite. Template for Classroom Management Hub for Teachers.</span>
+          <span>Built with the fixed-nav spec · v1.0</span>
+        </div>
+      </div>
+    </footer>
+    
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+<script>
+(function() {
+  // ---- VARIABLE PARAMETERS ----
+  var NAV_HEIGHT = parseInt('80px', 10);
+  var SCROLL_OFFSET = parseInt('14', 10);
+  var SCROLL_SPY_OFFSET = parseInt('26', 10);
+  var nav = document.getElementById('navbar');
+
+  // ---- goTo(id): single-pass scroll calculation (NO scrollIntoView) ----
+  window.goTo = function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var rect = el.getBoundingClientRect();
+    var target = rect.top + window.scrollY - NAV_HEIGHT - SCROLL_OFFSET;
+    window.scrollTo({ top: target, behavior: 'smooth' });
+  };
+
+  // ---- updateActive(id): toggle .active on nav spans ----
+  window.updateActive = function(id) {
+    if (!nav) return;
+    var items = nav.querySelectorAll('.nav-item');
+    for (var i = 0; i < items.length; i++) {
+      items[i].classList.remove('active');
+    }
+    var link = document.getElementById('link-' + id);
+    if (link) link.classList.add('active');
+  };
+
+  // ---- Scroll Spy: collect all .section elements (covers sections not in nav too) ----
+  var sections = [];
+  function collectSections() {
+    sections = Array.prototype.slice.call(document.querySelectorAll('section.section, footer.section'));
+  }
+  collectSections();
+
+  // ---- Scroll progress bar + back-to-top button ----
+  var progressBar = document.getElementById('scroll-progress');
+  var backToTop = document.getElementById('back-to-top');
+
+  function onScroll() {
+    if (!nav) return;
+
+    // 1) Scroll spy: find current section
+    var offset = nav.offsetHeight + SCROLL_SPY_OFFSET;
+    var current = sections.length ? sections[0].id : null;
+    for (var i = 0; i < sections.length; i++) {
+      var rect = sections[i].getBoundingClientRect();
+      if (rect.top <= offset) {
+        current = sections[i].id;
+      }
+    }
+    if (current) updateActive(current);
+
+    // 2) Update scroll progress bar (0% -> 100%)
+    if (progressBar) {
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+      progressBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    }
+
+    // 3) Toggle back-to-top button visibility (show after 400px of scroll)
+    if (backToTop) {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }
+  }
+
+  // ---- Back-to-top click handler (uses goTo('home') for spec compliance) ----
+  if (backToTop) {
+    backToTop.addEventListener('click', function() {
+      var homeEl = document.getElementById('home');
+      if (homeEl) {
+        window.goTo('home');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
+  // ---- Mobile hamburger menu: close on nav-item click ----
+  if (nav) {
+    var navLinks = nav.querySelectorAll('.nav-item');
+    for (var i = 0; i < navLinks.length; i++) {
+      navLinks[i].addEventListener('click', function() {
+        nav.classList.remove('nav-open');
+      });
+    }
+    // Close menu when clicking outside the navbar
+    document.addEventListener('click', function(e) {
+      if (!nav.contains(e.target) && nav.classList.contains('nav-open')) {
+        nav.classList.remove('nav-open');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function() { collectSections(); onScroll(); });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
